@@ -222,18 +222,18 @@ def _check_soft_constraints(roster, result):
             worker_shifts = [s for s in shifts if s["worker"] == worker]
             working_days = set(s["day_index"] for s in worker_shifts)
 
-            # Check full weekend off (Friday=5 and Saturday=6 both off)
-            fri_off = 5 not in working_days
+            # Check full weekend off (Saturday=6 and Sunday=0 both off)
             sat_off = 6 not in working_days
-            if fri_off and sat_off:
+            sun_off = 0 not in working_days
+            if sat_off and sun_off:
                 weekends_off += 1
                 result.add_soft_pass(
-                    f"Week {wk}: {worker} has full weekend off"
+                    f"Week {wk}: {worker} has full weekend off (Sat+Sun)"
                 )
-            elif fri_off or sat_off:
+            elif sat_off or sun_off:
                 result.add_soft_violation(
                     f"Week {wk}: {worker} has partial weekend "
-                    f"({'Fri off' if fri_off else 'Sat off'} only)"
+                    f"({'Sat off' if sat_off else 'Sun off'} only)"
                 )
 
             # Check consecutive days off
@@ -308,7 +308,7 @@ def get_worker_stats(roster):
             worker_shifts = [s for s in week_data["shifts"] if s["worker"] == worker]
             working_days = set(s["day_index"] for s in worker_shifts)
 
-            if 5 not in working_days and 6 not in working_days:
+            if 0 not in working_days and 6 not in working_days:
                 weekends_off += 1
 
             off_days = sorted(set(range(7)) - working_days)

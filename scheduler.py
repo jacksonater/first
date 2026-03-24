@@ -18,8 +18,13 @@ Math:
   2h slack for overlap
 
 Approach: Use 2-shift weekdays (12h + 10h) and 3-shift weekends (8h + 8h + 8h).
-One weekday (Monday) gets a 12h B-shift instead of 10h to reach exactly 160h.
-Define 4 roles (WO/X/Y/Z) that rotate across a 4-week cycle.
+The 2h slack is absorbed by role Q whose Sunday evening shift runs 1600-0400
+(2h past the 0200 coverage close) so every role totals exactly 40h.
+Define 4 roles (P/WO2/Q/R) that rotate across a 4-week cycle.
+
+Weekend off = Saturday + Sunday off together.
+Role WO2 works Mon-Thu evenings and is off Friday, Saturday and Sunday,
+giving every worker one full Sat+Sun weekend off per 4-week cycle.
 """
 
 import json
@@ -58,59 +63,65 @@ def _build_role_shifts():
 
     Daily shift structure:
       Sun,Tue,Wed,Thu: A-shift(0400-1600, 12h) + B-shift(1600-0200, 10h) = 22h
-      Mon: A-shift(0400-1600, 12h) + B-shift(1600-0400, 12h) = 24h (2h extra)
+      Mon: A-shift(0400-1600, 12h) + B-shift(1600-0200, 10h) = 22h
       Fri,Sat: E(0400-1200, 8h) + M(1200-2000, 8h) + L(2000-0400, 8h) = 24h
 
     Role assignments ensure:
       - Every role totals exactly 40h
       - All rest constraints (10h min) are met within and across weeks
       - Coverage is complete when all 4 roles are active simultaneously
+      - Each worker gets one full Saturday+Sunday off per 4-week cycle (role WO2)
+
+    The 2h budget slack is absorbed by role Q: the Sun B shift runs
+    1600-0400 (12h) rather than 1600-0200 (10h), covering 2h past the
+    Sunday coverage close so every role still totals exactly 40h.
     """
-    # Role WO: "Weekend Off" - works Sun/Tue/Wed/Thu evening shifts (10h each)
-    # Off: Monday, Friday, Saturday
+    # Role P: Sun/Mon day shifts + Fri/Sat late shifts
+    # Off: Tuesday, Wednesday, Thursday
+    # Hours: 12h + 12h + 8h + 8h = 40h
+    role_p = [
+        (0, 4, 12),    # Sun A: 0400-1600 (12h)
+        (1, 4, 12),    # Mon A: 0400-1600 (12h)
+        (5, 20, 8),    # Fri L: 2000-0400 (8h)
+        (6, 20, 8),    # Sat L: 2000-0400 (8h)
+    ]
+
+    # Role WO2: "Weekend Off" - works Mon-Thu evening shifts (10h each)
+    # Off: Friday, Saturday, Sunday  →  full Sat+Sun weekend off
     # Hours: 4 x 10h = 40h
-    role_wo = [
-        (0, 16, 10),   # Sun B: 1600-0200 (10h)
+    role_wo2 = [
+        (1, 16, 10),   # Mon B: 1600-0200 (10h)
         (2, 16, 10),   # Tue B: 1600-0200 (10h)
         (3, 16, 10),   # Wed B: 1600-0200 (10h)
         (4, 16, 10),   # Thu B: 1600-0200 (10h)
     ]
 
-    # Role X: works Tue/Thu day shifts + Fri/Sat early shifts
+    # Role Q: Sun evening (extended) + Wed day + Fri/Sat mid shifts
+    # Off: Monday, Tuesday, Thursday
+    # Hours: 12h + 12h + 8h + 8h = 40h
+    # Sun B runs 1600-0400 (12h) to absorb the 2h budget slack
+    role_q = [
+        (0, 16, 12),   # Sun B: 1600-0400 (12h, 2h past coverage close)
+        (3, 4, 12),    # Wed A: 0400-1600 (12h)
+        (5, 12, 8),    # Fri M: 1200-2000 (8h)
+        (6, 12, 8),    # Sat M: 1200-2000 (8h)
+    ]
+
+    # Role R: Tue/Thu day shifts + Fri/Sat early shifts
     # Off: Sunday, Monday, Wednesday
     # Hours: 2x12h + 2x8h = 40h
-    role_x = [
+    role_r = [
         (2, 4, 12),    # Tue A: 0400-1600 (12h)
         (4, 4, 12),    # Thu A: 0400-1600 (12h)
         (5, 4, 8),     # Fri E: 0400-1200 (8h)
         (6, 4, 8),     # Sat E: 0400-1200 (8h)
     ]
 
-    # Role Y: works Mon/Wed day shifts + Fri/Sat mid shifts
-    # Off: Sunday, Tuesday, Thursday
-    # Hours: 2x12h + 2x8h = 40h
-    role_y = [
-        (1, 4, 12),    # Mon A: 0400-1600 (12h)
-        (3, 4, 12),    # Wed A: 0400-1600 (12h)
-        (5, 12, 8),    # Fri M: 1200-2000 (8h)
-        (6, 12, 8),    # Sat M: 1200-2000 (8h)
-    ]
-
-    # Role Z: works Sun day + Mon evening + Fri/Sat late shifts
-    # Off: Tuesday, Wednesday, Thursday
-    # Hours: 12h + 12h + 8h + 8h = 40h
-    role_z = [
-        (0, 4, 12),    # Sun A: 0400-1600 (12h)
-        (1, 16, 12),   # Mon B: 1600-0400 (12h)
-        (5, 20, 8),    # Fri L: 2000-0400 (8h)
-        (6, 20, 8),    # Sat L: 2000-0400 (8h)
-    ]
-
     return {
-        "WO": role_wo,
-        "X": role_x,
-        "Y": role_y,
-        "Z": role_z,
+        "P": role_p,
+        "WO2": role_wo2,
+        "Q": role_q,
+        "R": role_r,
     }
 
 
@@ -118,20 +129,20 @@ def generate_roster():
     """
     Generate the full 4-week rotating roster.
 
-    Pattern order: WO -> Z -> X -> Y (ensures all cross-week rest constraints met).
+    Pattern order: P -> WO2 -> Q -> R (ensures all cross-week rest constraints met).
 
     Worker rotation:
-      Worker A: wk1=WO, wk2=Z, wk3=X, wk4=Y
-      Worker B: wk1=Y,  wk2=WO, wk3=Z, wk4=X
-      Worker C: wk1=X,  wk2=Y,  wk3=WO, wk4=Z
-      Worker D: wk1=Z,  wk2=X,  wk3=Y,  wk4=WO
+      Worker A: wk1=P,   wk2=WO2, wk3=Q,  wk4=R
+      Worker B: wk1=R,   wk2=P,   wk3=WO2, wk4=Q
+      Worker C: wk1=Q,   wk2=R,   wk3=P,  wk4=WO2
+      Worker D: wk1=WO2, wk2=Q,   wk3=R,  wk4=P
 
     In any calendar week, one worker is on each role -> full coverage.
     """
     roles = _build_role_shifts()
 
     # Pattern sequence for rotation (verified for cross-week rest compliance)
-    pattern_sequence = ["WO", "Z", "X", "Y"]
+    pattern_sequence = ["P", "WO2", "Q", "R"]
 
     # Worker assignments: worker_index -> list of 4 role names (one per week)
     # Worker A starts at offset 0, B at offset 1, etc.
