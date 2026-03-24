@@ -1,0 +1,1002 @@
+{
+  "workers": [
+    "Worker A",
+    "Worker B",
+    "Worker C",
+    "Worker D"
+  ],
+  "weeks": [
+    {
+      "week_number": 1,
+      "shifts": [
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "WO",
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "WO",
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "WO",
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "WO",
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "Y",
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "Y",
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "Y",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_hour": 20,
+          "end_time": "2000"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "Y",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_hour": 20,
+          "end_time": "2000"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "X",
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "X",
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "X",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_hour": 12,
+          "end_time": "1200"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "X",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_hour": 12,
+          "end_time": "1200"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "Z",
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "Z",
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 12,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "Z",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "Z",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_hour": 4,
+          "end_time": "0400"
+        }
+      ],
+      "worker_hours": {
+        "Worker A": 40,
+        "Worker B": 40,
+        "Worker C": 40,
+        "Worker D": 40
+      },
+      "worker_roles": {
+        "Worker A": "WO",
+        "Worker B": "Y",
+        "Worker C": "X",
+        "Worker D": "Z"
+      }
+    },
+    {
+      "week_number": 2,
+      "shifts": [
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "Z",
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "Z",
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 12,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "Z",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "Z",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "WO",
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "WO",
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "WO",
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "WO",
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "Y",
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "Y",
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "Y",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_hour": 20,
+          "end_time": "2000"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "Y",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_hour": 20,
+          "end_time": "2000"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "X",
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "X",
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "X",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_hour": 12,
+          "end_time": "1200"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "X",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_hour": 12,
+          "end_time": "1200"
+        }
+      ],
+      "worker_hours": {
+        "Worker A": 40,
+        "Worker B": 40,
+        "Worker C": 40,
+        "Worker D": 40
+      },
+      "worker_roles": {
+        "Worker A": "Z",
+        "Worker B": "WO",
+        "Worker C": "Y",
+        "Worker D": "X"
+      }
+    },
+    {
+      "week_number": 3,
+      "shifts": [
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "X",
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "X",
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "X",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_hour": 12,
+          "end_time": "1200"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "X",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_hour": 12,
+          "end_time": "1200"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "Z",
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "Z",
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 12,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "Z",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "Z",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "WO",
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "WO",
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "WO",
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "WO",
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "Y",
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "Y",
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "Y",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_hour": 20,
+          "end_time": "2000"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "Y",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_hour": 20,
+          "end_time": "2000"
+        }
+      ],
+      "worker_hours": {
+        "Worker A": 40,
+        "Worker B": 40,
+        "Worker C": 40,
+        "Worker D": 40
+      },
+      "worker_roles": {
+        "Worker A": "X",
+        "Worker B": "Z",
+        "Worker C": "WO",
+        "Worker D": "Y"
+      }
+    },
+    {
+      "week_number": 4,
+      "shifts": [
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "Y",
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "Y",
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "Y",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_hour": 20,
+          "end_time": "2000"
+        },
+        {
+          "worker": "Worker A",
+          "worker_index": 0,
+          "role": "Y",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_hour": 20,
+          "end_time": "2000"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "X",
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "X",
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "X",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_hour": 12,
+          "end_time": "1200"
+        },
+        {
+          "worker": "Worker B",
+          "worker_index": 1,
+          "role": "X",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_hour": 12,
+          "end_time": "1200"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "Z",
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_hour": 16,
+          "end_time": "1600"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "Z",
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 12,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "Z",
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker C",
+          "worker_index": 2,
+          "role": "Z",
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_hour": 4,
+          "end_time": "0400"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "WO",
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "WO",
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "WO",
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        },
+        {
+          "worker": "Worker D",
+          "worker_index": 3,
+          "role": "WO",
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_hour": 2,
+          "end_time": "0200"
+        }
+      ],
+      "worker_hours": {
+        "Worker A": 40,
+        "Worker B": 40,
+        "Worker C": 40,
+        "Worker D": 40
+      },
+      "worker_roles": {
+        "Worker A": "Y",
+        "Worker B": "X",
+        "Worker C": "Z",
+        "Worker D": "WO"
+      }
+    }
+  ],
+  "pattern_sequence": [
+    "WO",
+    "Z",
+    "X",
+    "Y"
+  ],
+  "role_definitions": {
+    "WO": {
+      "total_hours": 40,
+      "shifts": [
+        {
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_time": "0200"
+        },
+        {
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_time": "0200"
+        },
+        {
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_time": "0200"
+        },
+        {
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 10,
+          "end_time": "0200"
+        }
+      ]
+    },
+    "X": {
+      "total_hours": 40,
+      "shifts": [
+        {
+          "day": "Tuesday",
+          "day_index": 2,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_time": "1600"
+        },
+        {
+          "day": "Thursday",
+          "day_index": 4,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_time": "1600"
+        },
+        {
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_time": "1200"
+        },
+        {
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 8,
+          "end_time": "1200"
+        }
+      ]
+    },
+    "Y": {
+      "total_hours": 40,
+      "shifts": [
+        {
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_time": "1600"
+        },
+        {
+          "day": "Wednesday",
+          "day_index": 3,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_time": "1600"
+        },
+        {
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_time": "2000"
+        },
+        {
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 12,
+          "start_time": "1200",
+          "duration": 8,
+          "end_time": "2000"
+        }
+      ]
+    },
+    "Z": {
+      "total_hours": 40,
+      "shifts": [
+        {
+          "day": "Sunday",
+          "day_index": 0,
+          "start_hour": 4,
+          "start_time": "0400",
+          "duration": 12,
+          "end_time": "1600"
+        },
+        {
+          "day": "Monday",
+          "day_index": 1,
+          "start_hour": 16,
+          "start_time": "1600",
+          "duration": 12,
+          "end_time": "0400"
+        },
+        {
+          "day": "Friday",
+          "day_index": 5,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_time": "0400"
+        },
+        {
+          "day": "Saturday",
+          "day_index": 6,
+          "start_hour": 20,
+          "start_time": "2000",
+          "duration": 8,
+          "end_time": "0400"
+        }
+      ]
+    }
+  }
+}

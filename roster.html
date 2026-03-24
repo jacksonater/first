@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Week Rotating Roster</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a2e;
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-size: 1.8em;
+  }
+  .subtitle {
+    text-align: center;
+    color: #a0a0b0;
+    margin-bottom: 24px;
+    font-size: 0.95em;
+  }
+  .week-container {
+    margin-bottom: 28px;
+    background: #16213e;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .week-header {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #2a2a4a;
+  }
+  .week-header .roles {
+    font-size: 0.75em;
+    font-weight: 400;
+    color: #8888aa;
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  th {
+    background: #0f3460;
+    color: #e0e0e0;
+    padding: 8px 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+    border: 1px solid #1a1a3e;
+  }
+  td {
+    padding: 4px;
+    border: 1px solid #1a1a3e;
+    vertical-align: top;
+    height: 70px;
+    font-size: 0.78em;
+  }
+  .shift-block {
+    border-radius: 4px;
+    padding: 3px 5px;
+    margin-bottom: 2px;
+    font-size: 0.9em;
+    line-height: 1.3;
+  }
+  .shift-time {
+    font-weight: 700;
+  }
+  .shift-duration {
+    font-weight: 400;
+    opacity: 0.85;
+  }
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+  .summary-table th, .summary-table td {
+    padding: 8px 12px;
+    border: 1px solid #2a2a4a;
+    text-align: center;
+    height: auto;
+  }
+  .summary-table th {
+    background: #0f3460;
+  }
+  .summary-section {
+    background: #16213e;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .summary-section h2 {
+    color: #ffffff;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+  }
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9em;
+  }
+  .legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+  }
+  .coverage-note {
+    background: #1e3a1e;
+    border: 1px solid #2d5a2d;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 0.85em;
+    color: #90c090;
+  }
+  .violation {
+    background: #3a1e1e;
+    border: 1px solid #5a2d2d;
+    color: #c09090;
+  }
+</style>
+</head>
+<body>
+<h1>4-Week Rotating Roster</h1>
+<p class="subtitle">4 workers &middot; 40 hours/week each &middot; Coverage: Sun-Thu 0400-0200, Fri-Sat 0400-0400</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#4A90D9"></div>Worker A</div>
+  <div class="legend-item"><div class="legend-color" style="background:#E67E22"></div>Worker B</div>
+  <div class="legend-item"><div class="legend-color" style="background:#27AE60"></div>Worker C</div>
+  <div class="legend-item"><div class="legend-color" style="background:#8E44AD"></div>Worker D</div>
+</div>
+
+<div class="week-container">
+  <div class="week-header">Week 1<div class="roles">Roles: Worker A: WO, Worker B: Y, Worker C: X, Worker D: Z</div></div>
+  <table>
+    <tr>
+      <th style="width:60px">Time</th>
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0400</td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">0400-1200</span> <span class="shift-duration">(8h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">0400-1200</span> <span class="shift-duration">(8h)</span><br>Worker C</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0500</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0600</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0700</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0800</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0900</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1000</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1100</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1200</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">1200-2000</span> <span class="shift-duration">(8h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">1200-2000</span> <span class="shift-duration">(8h)</span><br>Worker B</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1300</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1400</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1500</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1600</td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">1600-0400</span> <span class="shift-duration">(12h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker A</div></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1700</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1800</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1900</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2000</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">2000-0400</span> <span class="shift-duration">(8h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">2000-0400</span> <span class="shift-duration">(8h)</span><br>Worker D</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2100</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2200</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2300</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0000</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0100</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0200</td>
+      <td></td>
+      <td style="background:#8E44AD22"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0300</td>
+      <td></td>
+      <td style="background:#8E44AD22"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+  </table>
+</div>
+
+<div class="week-container">
+  <div class="week-header">Week 2<div class="roles">Roles: Worker A: Z, Worker B: WO, Worker C: Y, Worker D: X</div></div>
+  <table>
+    <tr>
+      <th style="width:60px">Time</th>
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0400</td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">0400-1200</span> <span class="shift-duration">(8h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">0400-1200</span> <span class="shift-duration">(8h)</span><br>Worker D</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0500</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0600</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0700</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0800</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0900</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1000</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1100</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1200</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">1200-2000</span> <span class="shift-duration">(8h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">1200-2000</span> <span class="shift-duration">(8h)</span><br>Worker C</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1300</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1400</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1500</td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1600</td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">1600-0400</span> <span class="shift-duration">(12h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker B</div></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1700</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1800</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1900</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2000</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">2000-0400</span> <span class="shift-duration">(8h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">2000-0400</span> <span class="shift-duration">(8h)</span><br>Worker A</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2100</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2200</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2300</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0000</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0100</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0200</td>
+      <td></td>
+      <td style="background:#4A90D922"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0300</td>
+      <td></td>
+      <td style="background:#4A90D922"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+  </table>
+</div>
+
+<div class="week-container">
+  <div class="week-header">Week 3<div class="roles">Roles: Worker A: X, Worker B: Z, Worker C: WO, Worker D: Y</div></div>
+  <table>
+    <tr>
+      <th style="width:60px">Time</th>
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0400</td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">0400-1200</span> <span class="shift-duration">(8h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">0400-1200</span> <span class="shift-duration">(8h)</span><br>Worker A</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0500</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0600</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0700</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0800</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0900</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1000</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1100</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1200</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">1200-2000</span> <span class="shift-duration">(8h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">1200-2000</span> <span class="shift-duration">(8h)</span><br>Worker D</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1300</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1400</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1500</td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1600</td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">1600-0400</span> <span class="shift-duration">(12h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker C</div></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1700</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1800</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1900</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2000</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">2000-0400</span> <span class="shift-duration">(8h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">2000-0400</span> <span class="shift-duration">(8h)</span><br>Worker B</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2100</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2200</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2300</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0000</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0100</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0200</td>
+      <td></td>
+      <td style="background:#E67E2222"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0300</td>
+      <td></td>
+      <td style="background:#E67E2222"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+  </table>
+</div>
+
+<div class="week-container">
+  <div class="week-header">Week 4<div class="roles">Roles: Worker A: Y, Worker B: X, Worker C: Z, Worker D: WO</div></div>
+  <table>
+    <tr>
+      <th style="width:60px">Time</th>
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0400</td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">0400-1600</span> <span class="shift-duration">(12h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">0400-1200</span> <span class="shift-duration">(8h)</span><br>Worker B</div></td>
+      <td><div class="shift-block" style="background:#E67E22;color:#FFFFFF"><span class="shift-time">0400-1200</span> <span class="shift-duration">(8h)</span><br>Worker B</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0500</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0600</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0700</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0800</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0900</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1000</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1100</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#E67E2222"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1200</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">1200-2000</span> <span class="shift-duration">(8h)</span><br>Worker A</div></td>
+      <td><div class="shift-block" style="background:#4A90D9;color:#FFFFFF"><span class="shift-time">1200-2000</span> <span class="shift-duration">(8h)</span><br>Worker A</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1300</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1400</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1500</td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#E67E2222"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1600</td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">1600-0400</span> <span class="shift-duration">(12h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker D</div></td>
+      <td><div class="shift-block" style="background:#8E44AD;color:#FFFFFF"><span class="shift-time">1600-0200</span> <span class="shift-duration">(10h)</span><br>Worker D</div></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1700</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1800</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">1900</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#4A90D922"></td>
+      <td style="background:#4A90D922"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2000</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">2000-0400</span> <span class="shift-duration">(8h)</span><br>Worker C</div></td>
+      <td><div class="shift-block" style="background:#27AE60;color:#FFFFFF"><span class="shift-time">2000-0400</span> <span class="shift-duration">(8h)</span><br>Worker C</div></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2100</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2200</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">2300</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0000</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0100</td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#8E44AD22"></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0200</td>
+      <td></td>
+      <td style="background:#27AE6022"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">0300</td>
+      <td></td>
+      <td style="background:#27AE6022"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background:#27AE6022"></td>
+      <td style="background:#27AE6022"></td>
+    </tr>
+  </table>
+</div>
+
+<div class="summary-section">
+  <h2>Worker Summary (4-Week Cycle)</h2>
+  <table class="summary-table">
+    <tr>
+      <th>Worker</th><th>Wk 1</th><th>Wk 2</th><th>Wk 3</th><th>Wk 4</th><th>Total</th><th>Weekends Off</th><th>Consecutive Days Off</th>
+    </tr>
+    <tr>
+      <td><strong>Worker A</strong></td><td>40h</td><td>40h</td><td>40h</td><td>40h</td><td><strong>160h</strong></td><td>1/4</td><td>3/4</td>
+    </tr>
+    <tr>
+      <td><strong>Worker B</strong></td><td>40h</td><td>40h</td><td>40h</td><td>40h</td><td><strong>160h</strong></td><td>1/4</td><td>3/4</td>
+    </tr>
+    <tr>
+      <td><strong>Worker C</strong></td><td>40h</td><td>40h</td><td>40h</td><td>40h</td><td><strong>160h</strong></td><td>1/4</td><td>3/4</td>
+    </tr>
+    <tr>
+      <td><strong>Worker D</strong></td><td>40h</td><td>40h</td><td>40h</td><td>40h</td><td><strong>160h</strong></td><td>1/4</td><td>3/4</td>
+    </tr>
+  </table>
+  <div class="coverage-note">All hard constraints satisfied. Schedule is valid.</div>
+  <div class="coverage-note" style="background:#2a2a1e;border-color:#4a4a2d;color:#c0c090">Soft constraint notes:<br>&bull; Week 4: Worker A has split days off (Sunday, Tuesday, Thursday)<br>&bull; Week 1: Worker B has split days off (Sunday, Tuesday, Thursday)<br>&bull; Week 2: Worker C has split days off (Sunday, Tuesday, Thursday)<br>&bull; Week 3: Worker D has split days off (Sunday, Tuesday, Thursday)<br></div>
+</div>
+
+</body>
+</html>
