@@ -154,10 +154,17 @@ def _get_worker_shifts_sorted(week_data, worker_name):
 
 
 def _validate_rest_between_shifts(week_data, wk, result):
-    """Check minimum 10 hours rest between consecutive shifts for each worker."""
+    """Check minimum 10 hours rest between consecutive shifts for each worker.
+
+    Also checks the circular wrap-around gap: a late-Saturday shift that
+    bleeds into Sunday must have ≥10h before the worker's first shift of
+    the same week (e.g. a Sunday morning shift).
+    """
     workers = roster_workers(week_data)
     for worker in workers:
         shifts = _get_worker_shifts_sorted(week_data, worker)
+
+        # Consecutive pairs within the week
         for i in range(len(shifts) - 1):
             s1 = shifts[i]
             s2 = shifts[i + 1]
@@ -169,6 +176,23 @@ def _validate_rest_between_shifts(week_data, wk, result):
                     f"Week {wk}: {worker} has only {gap}h rest between "
                     f"{s1['day']} {s1['start_time']}-{s1['end_time']} and "
                     f"{s2['day']} {s2['start_time']}-{s2['end_time']}"
+                )
+
+        # Circular wrap-around: last shift end vs first shift start
+        # A shift ending past Sat midnight (abs > 168h) must still have
+        # ≥10h before the worker's earliest shift of the same week.
+        if len(shifts) >= 2:
+            last = shifts[-1]
+            first = shifts[0]
+            last_end = last["day_index"] * 24 + last["start_hour"] + last["duration"]
+            first_start_next_cycle = 168 + first["day_index"] * 24 + first["start_hour"]
+            circular_gap = first_start_next_cycle - last_end
+            if circular_gap < MIN_REST_HOURS:
+                result.add_hard(
+                    f"Week {wk}: {worker} has only {circular_gap:.1f}h rest "
+                    f"(circular) between "
+                    f"{last['day']} {last['start_time']}-{last['end_time']} and "
+                    f"{first['day']} {first['start_time']}"
                 )
 
 

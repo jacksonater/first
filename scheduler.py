@@ -76,14 +76,16 @@ def _build_role_shifts():
     1600-0400 (12h) rather than 1600-0200 (10h), covering 2h past the
     Sunday coverage close so every role still totals exactly 40h.
     """
-    # Role P: Sun/Mon day shifts + Fri/Sat late shifts
-    # Off: Tuesday, Wednesday, Thursday
+    # Role P: Sun/Wed day shifts + Fri/Sat early shifts
+    # Off: Monday, Tuesday, Thursday
     # Hours: 12h + 12h + 8h + 8h = 40h
+    # FriE ends Fri 1200; SatE starts Sat 0400 → 16h rest ✓
+    # SatE ends Sat 1200 — no Sunday shift in this role, no wrap conflict ✓
     role_p = [
         (0, 4, 12),    # Sun A: 0400-1600 (12h)
-        (1, 4, 12),    # Mon A: 0400-1600 (12h)
-        (5, 20, 8),    # Fri L: 2000-0400 (8h)
-        (6, 20, 8),    # Sat L: 2000-0400 (8h)
+        (3, 4, 12),    # Wed A: 0400-1600 (12h)
+        (5, 4, 8),     # Fri E: 0400-1200 (8h)
+        (6, 4, 8),     # Sat E: 0400-1200 (8h)
     ]
 
     # Role WO2: "Weekend Off" - works Mon-Thu evening shifts (10h each)
@@ -96,25 +98,29 @@ def _build_role_shifts():
         (4, 16, 10),   # Thu B: 1600-0200 (10h)
     ]
 
-    # Role Q: Sun evening (extended) + Wed day + Fri/Sat mid shifts
-    # Off: Monday, Tuesday, Thursday
+    # Role Q: Sun evening (extended) + Thu day + Fri/Sat mid shifts
+    # Off: Monday, Tuesday, Wednesday
     # Hours: 12h + 12h + 8h + 8h = 40h
-    # Sun B runs 1600-0400 (12h) to absorb the 2h budget slack
+    # Sun B runs 1600-0400 (12h) to absorb the 2h budget slack.
+    # FriM ends Fri 2000; SatM starts Sat 1200 → 16h rest ✓
+    # SatM ends Sat 2000 — no Sunday shift in this role, no wrap conflict ✓
     role_q = [
         (0, 16, 12),   # Sun B: 1600-0400 (12h, 2h past coverage close)
-        (3, 4, 12),    # Wed A: 0400-1600 (12h)
+        (4, 4, 12),    # Thu A: 0400-1600 (12h)
         (5, 12, 8),    # Fri M: 1200-2000 (8h)
         (6, 12, 8),    # Sat M: 1200-2000 (8h)
     ]
 
-    # Role R: Tue/Thu day shifts + Fri/Sat early shifts
-    # Off: Sunday, Monday, Wednesday
+    # Role R: Mon/Tue day shifts + Fri/Sat late shifts
+    # Off: Sunday, Wednesday, Thursday
     # Hours: 2x12h + 2x8h = 40h
+    # FriL ends Sat 0400; SatL starts Sat 2000 → 16h rest ✓
+    # SatL ends Sun 0400 — no Sunday shift in this role, no wrap conflict ✓
     role_r = [
+        (1, 4, 12),    # Mon A: 0400-1600 (12h)
         (2, 4, 12),    # Tue A: 0400-1600 (12h)
-        (4, 4, 12),    # Thu A: 0400-1600 (12h)
-        (5, 4, 8),     # Fri E: 0400-1200 (8h)
-        (6, 4, 8),     # Sat E: 0400-1200 (8h)
+        (5, 20, 8),    # Fri L: 2000-0400 (8h)
+        (6, 20, 8),    # Sat L: 2000-0400 (8h)
     ]
 
     return {
@@ -129,20 +135,23 @@ def generate_roster():
     """
     Generate the full 4-week rotating roster.
 
-    Pattern order: P -> WO2 -> Q -> R (ensures all cross-week rest constraints met).
+    Pattern order: P -> Q -> R -> WO2 (ensures all cross-week rest constraints met).
 
     Worker rotation:
-      Worker A: wk1=P,   wk2=WO2, wk3=Q,  wk4=R
-      Worker B: wk1=R,   wk2=P,   wk3=WO2, wk4=Q
-      Worker C: wk1=Q,   wk2=R,   wk3=P,  wk4=WO2
-      Worker D: wk1=WO2, wk2=Q,   wk3=R,  wk4=P
+      Worker A: wk1=P,   wk2=Q,   wk3=R,   wk4=WO2
+      Worker B: wk1=WO2, wk2=P,   wk3=Q,   wk4=R
+      Worker C: wk1=R,   wk2=WO2, wk3=P,   wk4=Q
+      Worker D: wk1=Q,   wk2=R,   wk3=WO2, wk4=P
 
     In any calendar week, one worker is on each role -> full coverage.
     """
     roles = _build_role_shifts()
 
     # Pattern sequence for rotation (verified for cross-week rest compliance)
-    pattern_sequence = ["P", "WO2", "Q", "R"]
+    # Order matters: the role with SatL (R) must not be immediately followed
+    # by the role with SunA (P), as SatL ends Sun 0400 and SunA starts Sun 0400.
+    # P→Q→R→WO2 keeps a ≥24h gap at every cross-week boundary.
+    pattern_sequence = ["P", "Q", "R", "WO2"]
 
     # Worker assignments: worker_index -> list of 4 role names (one per week)
     # Worker A starts at offset 0, B at offset 1, etc.

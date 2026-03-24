@@ -25,10 +25,10 @@ WORKER_COLORS = {
 }
 
 ROLE_LABELS = {
-    "P": "Days (Sun/Mon) + Late weekends",
+    "P": "Days (Sun/Wed) + Early weekends",
     "WO2": "Evenings (Mon-Thu) \u2014 Sat+Sun off",
-    "Q": "Sun evening + Wed day + Mid weekends",
-    "R": "Days (Tue/Thu) + Early weekends",
+    "Q": "Sun evening + Thu day + Mid weekends",
+    "R": "Days (Mon/Tue) + Late weekends",
 }
 
 
