@@ -12,6 +12,10 @@ from validator import get_worker_stats, get_coverage_gaps
 DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 DAY_ABBR = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
+# Display order: Monday first, Sunday last
+DAY_ORDER = [1, 2, 3, 4, 5, 6, 0]  # Mon=1 … Sat=6, Sun=0
+DAY_ORDER_ABBR = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
 # Colour scheme for workers
 WORKER_COLORS = {
     "Worker A": {"bg": "#4A90D9", "text": "#FFFFFF"},
@@ -93,11 +97,10 @@ def render_html(roster, validation_result, output_path="roster.html"):
     border: 1px solid #1a1a3e;
   }}
   td {{
-    padding: 4px;
+    padding: 6px;
     border: 1px solid #1a1a3e;
-    vertical-align: top;
-    height: 70px;
-    font-size: 0.78em;
+    vertical-align: middle;
+    font-size: 0.85em;
   }}
   .shift-block {{
     border-radius: 4px;
@@ -185,63 +188,51 @@ def render_html(roster, validation_result, output_path="roster.html"):
 
     html += "</div>\n\n"
 
-    # Render each week
+    # Render each week as a compact worker-per-row table
     for week_data in roster["weeks"]:
         wk = week_data["week_number"]
         roles = week_data.get("worker_roles", {})
-        role_str = ", ".join(f"{w}: {r}" for w, r in roles.items())
+        role_str = ", ".join(f"{w.replace('Worker ', '')}: {r}" for w, r in roles.items())
 
         html += f'<div class="week-container">\n'
         html += f'  <div class="week-header">Week {wk}'
         html += f'<div class="roles">Roles: {role_str}</div></div>\n'
         html += "  <table>\n    <tr>\n"
 
-        # Time column + day columns
-        html += '      <th style="width:60px">Time</th>\n'
-        for day in DAY_ABBR:
-            html += f"      <th>{day}</th>\n"
+        # Header row: Worker | Mon | Tue | Wed | Thu | Fri | Sat | Sun
+        html += '      <th style="width:90px">Worker</th>\n'
+        for abbr in DAY_ORDER_ABBR:
+            html += f"      <th>{abbr}</th>\n"
         html += "    </tr>\n"
 
-        # Build shift grid - show shifts as blocks in their time slots
-        # Use hour rows from 0400 to 0400 (next day)
-        time_slots = list(range(4, 28))  # 0400 to 0400
+        # One row per worker
+        for worker in roster["workers"]:
+            colors = WORKER_COLORS.get(worker, {"bg": "#555", "text": "#fff"})
+            worker_label = worker.replace("Worker ", "")
+            html += f'    <tr>\n'
+            html += (
+                f'      <td style="background:{colors["bg"]};color:{colors["text"]};'
+                f'font-weight:700;text-align:center">{worker_label}</td>\n'
+            )
 
-        for hour in time_slots:
-            display_hour = hour % 24
-            html += f'    <tr>\n      <td style="text-align:center;font-weight:600;font-size:0.8em;height:22px">{display_hour:02d}00</td>\n'
-
-            for day_idx in range(7):
-                day_shifts = [s for s in week_data["shifts"]
-                             if s["day_index"] == day_idx]
-
-                cell_content = ""
-                cell_bg = ""
-                for s in day_shifts:
-                    shift_start = s["start_hour"]
-                    shift_end = shift_start + s["duration"]
-
-                    if shift_start == hour:
-                        colors = WORKER_COLORS.get(s["worker"], {"bg": "#555", "text": "#fff"})
-                        span_hours = int(s["duration"])
-                        worker_label = s["worker"].replace("Worker ", "")
-                        cell_content = (
-                            f'<div class="shift-block" style="background:{colors["bg"]};'
-                            f'color:{colors["text"]}">'
-                            f'<span class="shift-time">{s["start_time"]}-{s["end_time"]}</span> '
-                            f'<span class="shift-duration">({s["duration"]}h)</span><br>'
-                            f'Worker {worker_label}'
-                            f'</div>'
-                        )
-                    elif shift_start < hour < shift_end:
-                        colors = WORKER_COLORS.get(s["worker"], {"bg": "#555", "text": "#fff"})
-                        cell_bg = f' style="background:{colors["bg"]}22"'
-
-                if cell_content:
-                    html += f"      <td>{cell_content}</td>\n"
-                elif cell_bg:
-                    html += f"      <td{cell_bg}></td>\n"
+            for day_idx in DAY_ORDER:
+                day_shifts = sorted(
+                    [s for s in week_data["shifts"]
+                     if s["worker"] == worker and s["day_index"] == day_idx],
+                    key=lambda s: s["start_hour"],
+                )
+                if day_shifts:
+                    cell_lines = "".join(
+                        f'<div class="shift-block" style="background:{colors["bg"]}33;'
+                        f'color:#e0e0e0;border-left:3px solid {colors["bg"]}">'
+                        f'{s["start_time"]}–{s["end_time"]}'
+                        f'<span class="shift-duration"> ({s["duration"]}h)</span>'
+                        f'</div>'
+                        for s in day_shifts
+                    )
+                    html += f"      <td>{cell_lines}</td>\n"
                 else:
-                    html += "      <td></td>\n"
+                    html += '      <td style="color:#444;text-align:center">—</td>\n'
 
             html += "    </tr>\n"
 
